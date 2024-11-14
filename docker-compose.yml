@@ -1,12 +1,17 @@
 name: blocksense-hackaton
 services:
   anvil:
-    image: ghcr.io/foundry-rs/foundry:nightly-0688b5ad19a637303c038d1a66aec62a73713e20 
-    entrypoint: [ 'sh', '-c', 'anvil -p 8545 --host 0.0.0.0 --fork-url "https://ethereum-sepolia-rpc.publicnode.com" --chain-id 99999999999' ]
+    image: ghcr.io/foundry-rs/foundry:nightly-0688b5ad19a637303c038d1a66aec62a73713e20
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        'anvil -p 8545 --host 0.0.0.0 --fork-url "https://ethereum-sepolia-rpc.publicnode.com" --chain-id 99999999999',
+      ]
       #entrypoint: [ 'sh', '-c', 'anvil -p 8545 --host 0.0.0.0 --fork-url "wss://polygon-amoy-bor-rpc.publicnode.com" --chain-id 99999999999' ]
 
     ports:
-      - '8545:8545'
+      - "8545:8545"
     networks:
       - backend
     healthcheck:
@@ -15,13 +20,12 @@ services:
       timeout: 5s
       retries: 1
 
-
   sequencer:
     image: ymadzhunkov/blocksense_hackaton:sequencer
     ports:
-      - '8877:8877'
-      - '25555:25555'
-      - '25556:25556'
+      - "8877:8877"
+      - "25555:25555"
+      - "25556:25556"
     volumes:
       - ./config/feeds_config.json:/usr/local/blocksense/feeds_config.json
       - ./config/sequencer_config.json:/usr/local/blocksense/apps/sequencer/sequencer_config.json
@@ -29,7 +33,11 @@ services:
     networks:
       - backend
     healthcheck:
-      test: [ CMD-SHELL, 'wget http://0.0.0.0:8877 2>&1 | grep -c "ERROR 404: Not Found" > /dev/null' ]
+      test:
+        [
+          CMD-SHELL,
+          'wget http://0.0.0.0:8877 2>&1 | grep -c "ERROR 404: Not Found" > /dev/null',
+        ]
       interval: 5s
       timeout: 5s
       retries: 1
@@ -51,7 +59,6 @@ services:
       anvil:
         condition: service_healthy
 
-
   reporter:
     image: ymadzhunkov/blocksense_hackaton:reporter
     networks:
@@ -64,8 +71,9 @@ services:
       - ./examples/cmc:/usr/local/blocksense/oracles/cmc
       - ./examples/string_oracle:/usr/local/blocksense/oracles/string_oracle
     #entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/string_oracle && /spin up' ]
-    entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
-    #entrypoint: ['/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/yahoo && /spin up']
+    # entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
+    entrypoint:
+      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/yahoo && /spin up"]
     #entrypoint: ['/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/cmc && /spin up']
 
     depends_on:
