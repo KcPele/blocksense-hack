@@ -1,4 +1,4 @@
-name: blocksense-hackaton
+version: "3.8"
 services:
   anvil:
     image: ghcr.io/foundry-rs/foundry:nightly-0688b5ad19a637303c038d1a66aec62a73713e20
@@ -8,8 +8,6 @@ services:
         "-c",
         'anvil -p 8545 --host 0.0.0.0 --fork-url "https://ethereum-sepolia-rpc.publicnode.com" --chain-id 99999999999',
       ]
-      #entrypoint: [ 'sh', '-c', 'anvil -p 8545 --host 0.0.0.0 --fork-url "wss://polygon-amoy-bor-rpc.publicnode.com" --chain-id 99999999999' ]
-
     ports:
       - "8545:8545"
     networks:
@@ -70,13 +68,13 @@ services:
       - ./examples/revolut:/usr/local/blocksense/oracles/revolut
       - ./examples/cmc:/usr/local/blocksense/oracles/cmc
       - ./examples/string_oracle:/usr/local/blocksense/oracles/string_oracle
-    #entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/string_oracle && /spin up' ]
-    # entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
-    # entrypoint:
-    #   ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/yahoo && /spin up"]
+      - ./examples/coingecko:/usr/local/blocksense/oracles/coingecko
     entrypoint:
-      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/cmc && /spin up"]
-
+      [
+        "/bin/sh",
+        "-c",
+        "cd /usr/local/blocksense/oracles/coingecko && /spin up",
+      ]
     depends_on:
       sequencer:
         condition: service_healthy
