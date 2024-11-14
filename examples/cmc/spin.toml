@@ -27,7 +27,7 @@ data = '{"cmc_id":20641,"cmc_quote":"EURC"}'
 id = "253"
 
 [[trigger.oracle.capabilities]]
-data = "00000000-0000-0000-0000-000000000000"
+data = "09ce6e67-9c19-474b-8c44-265d4ac04385"
 id = "CMC_API_KEY"
 
 [component.coinmarketcap]
