@@ -79,9 +79,10 @@ services:
 =======
     #entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/string_oracle && /spin up' ]
     # entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
+    # entrypoint:
+    #   ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/yahoo && /spin up"]
     entrypoint:
-      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/yahoo && /spin up"]
-    #entrypoint: ['/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/cmc && /spin up']
+      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/cmc && /spin up"]
 
 >>>>>>> 9b829e9 (yahoo config)
     depends_on:
