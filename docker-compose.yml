@@ -69,12 +69,9 @@ services:
       - ./examples/cmc:/usr/local/blocksense/oracles/cmc
       - ./examples/string_oracle:/usr/local/blocksense/oracles/string_oracle
       - ./examples/coingecko:/usr/local/blocksense/oracles/coingecko
+      - ./examples/binance:/usr/local/blocksense/oracles/binance
     entrypoint:
-      [
-        "/bin/sh",
-        "-c",
-        "cd /usr/local/blocksense/oracles/coingecko && /spin up",
-      ]
+      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/binance && /spin up"]
     depends_on:
       sequencer:
         condition: service_healthy
