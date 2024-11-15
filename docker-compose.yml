@@ -76,6 +76,7 @@ services:
       - ./examples/binance:/usr/local/blocksense/oracles/binance
     entrypoint:
       ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/binance && /spin up"]
+<<<<<<< HEAD
 =======
     #entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/string_oracle && /spin up' ]
     # entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
@@ -85,6 +86,8 @@ services:
       ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/cmc && /spin up"]
 
 >>>>>>> 9b829e9 (yahoo config)
+=======
+>>>>>>> d65b2db (binance)
     depends_on:
       sequencer:
         condition: service_healthy
