@@ -1,4 +1,4 @@
-version: "3.8"
+name: blocksense-hackaton
 services:
   anvil:
     image: ghcr.io/foundry-rs/foundry:nightly-0688b5ad19a637303c038d1a66aec62a73713e20
@@ -8,6 +8,8 @@ services:
         "-c",
         'anvil -p 8545 --host 0.0.0.0 --fork-url "https://ethereum-sepolia-rpc.publicnode.com" --chain-id 99999999999',
       ]
+      #entrypoint: [ 'sh', '-c', 'anvil -p 8545 --host 0.0.0.0 --fork-url "wss://polygon-amoy-bor-rpc.publicnode.com" --chain-id 99999999999' ]
+
     ports:
       - "8545:8545"
     networks:
@@ -61,6 +63,7 @@ services:
     image: ymadzhunkov/blocksense_hackaton:reporter
     networks:
       - backend
+
     volumes:
       - ./config/reporter_config.json:/usr/local/blocksense/apps/reporter/reporter_config.json
       - ./config/reporter_secret_key:/usr/local/blocksense/apps/reporter/reporter_secret_key
@@ -68,10 +71,19 @@ services:
       - ./examples/revolut:/usr/local/blocksense/oracles/revolut
       - ./examples/cmc:/usr/local/blocksense/oracles/cmc
       - ./examples/string_oracle:/usr/local/blocksense/oracles/string_oracle
+<<<<<<< HEAD
       - ./examples/coingecko:/usr/local/blocksense/oracles/coingecko
       - ./examples/binance:/usr/local/blocksense/oracles/binance
     entrypoint:
       ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/binance && /spin up"]
+=======
+    #entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/string_oracle && /spin up' ]
+    # entrypoint: [ '/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/revolut && /spin up' ]
+    entrypoint:
+      ["/bin/sh", "-c", "cd /usr/local/blocksense/oracles/yahoo && /spin up"]
+    #entrypoint: ['/bin/sh', '-c', 'cd /usr/local/blocksense/oracles/cmc && /spin up']
+
+>>>>>>> 9b829e9 (yahoo config)
     depends_on:
       sequencer:
         condition: service_healthy

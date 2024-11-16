@@ -33,8 +33,13 @@ allowed_outbound_hosts = [
 ]
 
 [[trigger.oracle.capabilities]]
+<<<<<<< HEAD
 data = "AFqPLlH7lW1k5BIZQGeXE48rDtXTit0z6j1NZovP"
 id = "YAHOO_API_KEY"
+=======
+data = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+id = "AFqPLlH7lW1k5BIZQGeXE48rDtXTit0z6j1NZovP"
+>>>>>>> 9b829e9 (yahoo config)
 
 [component.yahoo.build]
 command = "cargo build --target wasm32-wasi --release"
